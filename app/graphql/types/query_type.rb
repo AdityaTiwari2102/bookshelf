@@ -9,6 +9,8 @@ module Types
         argument :name, String, required: true
       end
     def test_field(name:)
+      # Rails.logger.info context.inspect
+      Rails.logger.info context[:time]
       "Hello #{name}!"
     end
   end
