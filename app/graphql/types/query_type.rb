@@ -13,5 +13,13 @@ module Types
       Rails.logger.info context[:time]
       "Hello #{name}!"
     end
+
+    field :author, Types::AuthorType, null: true, description: "One author" do
+      argument :id, ID, required: true
+    end
+
+    def author(id:)
+      Author.where(id: id).first
+    end
   end
 end
