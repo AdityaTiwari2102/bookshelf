@@ -22,5 +22,19 @@ module Types
       existing = Author.where(id: author[:id]).first
       existing&.update(author.to_h)
     end
+
+    field :delete_author, String, null: false, description: "Delete an author" do
+      argument :id, ID, required: true
+    end
+
+    def delete_author(id:)
+      author = Author.where(id: id)
+      if author.present?
+        author.destroy_all
+        "Author with id:#{id} is deleted."
+      else
+        "Could not find the author with id:#{id}."
+      end
+    end
   end
 end
